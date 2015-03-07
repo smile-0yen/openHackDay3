@@ -64,6 +64,76 @@
 
 				<!-- Example of nested vertical slides -->
 				<section>
+                    <div id="area" class="epoch category10" style="height: 200px;"></div>
+                    <div class="gauges">
+                        <div id="gaugeChart"  class="epoch gauge-large" style="position: relative;"></div>
+                        <div id="gaugeChart2" class="epoch gauge-large" style="position: relative;"></div>
+                    </div>
+
+                    <script>
+                        <!-- line graph  -->
+                        idx = ((new Date()).getTime()/1000)|0;
+                        var data = [
+                          { label: 'Layer 1', values: [ {time: idx, y: 3}/*,{time: idx+1, y: 2}*/] },
+                          { label: 'Layer 2', values: [ {time: idx, y: 1}/*{time: idx+1, y: 3}*/] }
+                        ];
+                        
+                        var areaChartInstance = $('#area').epoch({
+                            type: 'time.line',
+                            data: data,
+                            axes: ['left', 'right', 'bottom']
+                        });
+                        
+                        var idx = 3;
+                        var nextData;
+                        
+                        function addData() {
+                            idx = ((new Date()).getTime()/1000)|0;
+                            //console.log("idx",idx);
+                            nextData = [
+                               {time: idx, y: Math.random()*10},{time: idx, y: Math.random()*10}
+                            ];
+                            //console.dir(nextData[0]);
+                            areaChartInstance.push(nextData);    
+                        
+                            setTimeout(function() {
+                                addData();
+                            },500);
+                        }
+                        addData();
+
+                        <!-- left hand side gauge  -->
+                        gaugeChartInstance = $('#gaugeChart').epoch({
+                          type: 'time.gauge',
+                          value: 0.5
+                        });
+                    
+                        var nextValue;
+                        function addValue() {
+                            nextValue = Math.random();
+                            gaugeChartInstance.push(nextValue);    
+                            setTimeout(function() {
+                                addValue();
+                            }, 500);
+                        }
+                        addValue();
+
+                        <!-- right hand side gauge  -->
+                        gaugeChartInstance2 = $('#gaugeChart2').epoch({
+                          type: 'time.gauge',
+                          value: 0.5
+                        });
+                    
+                        var nextValue2;
+                        function addValue2() {
+                            nextValue2 = Math.random();
+                            gaugeChartInstance2.push(nextValue2);    
+                            setTimeout(function() {
+                                addValue2();
+                            }, 500);
+                        }
+                        addValue2();
+                    </script>
 					<section>
 						<h2>Vertical Slides</h2>
 						<p>
