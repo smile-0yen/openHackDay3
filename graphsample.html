@@ -31,23 +31,24 @@
                 axes: ['left', 'right', 'bottom']
             });
 
+            var updateRate = 100;
+
             var player1 = 0;
             var player2 = 0;
             function updateData() {
               var request=new XMLHttpRequest();
               request.open("GET", './input', false);
               request.send("");
-              player1 = request.response;
               var data = request.response.split(',');
-              if (data && data.length == 2) {
+              if (data && data.length >= 2) {
                 player1 = data[0];
                 player2 = data[1];
-                console.dir("p1:" + player1);
-                console.dir("p2:" + player2);
+//                console.dir("p1:" + player1);
+//                console.dir("p2:" + player2);
               }
               setTimeout(function() {
                   updateData();
-              },500);
+              },updateRate);
             }
             updateData();
             
@@ -65,7 +66,7 @@
             
                 setTimeout(function() {
                     addData();
-                },500);
+                },updateRate);
             }
             addData();
 
@@ -74,12 +75,11 @@
               type: 'time.gauge',
               value: 0.5
             });
-        
             function addValue() {
                 gaugeChartInstance.push(player1);
                 setTimeout(function() {
                     addValue();
-                }, 500);
+                }, updateRate);
             }
             addValue();
 
@@ -88,13 +88,11 @@
               type: 'time.gauge',
               value: 0.5
             });
-        
             function addValue2() {
                 gaugeChartInstance2.push(player2); 
-                //gaugeChartInstance2.push(Math.random()); 
                 setTimeout(function() {
                     addValue2();
-                }, 500);
+                }, updateRate);
             }
             addValue2();
         </script>
