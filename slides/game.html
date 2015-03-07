@@ -127,7 +127,7 @@
         var message1 = document.getElementById('message1');
         if (player1_waza == "attack") {
           message1.textContent = "攻撃!!";
-          hp2 = hp2 - (score1 / 100);
+          hp2 = hp2 - (score1 / 1000);
           gaugeChartInstance2.push(hp2);
           score1 = 0;
           document.getElementById("sound-file1").play();
@@ -145,7 +145,7 @@
         var message2 = document.getElementById('message2');
         if (player2_waza == "attack") {
           message2.textContent = "攻撃!!";
-          hp1 = hp1 - (score2 / 100);
+          hp1 = hp1 - (score2 / 1000);
           gaugeChartInstance.push(hp1);
           score2 = 0;
           document.getElementById("sound-file2").play();
