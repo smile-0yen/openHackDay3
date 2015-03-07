@@ -1,143 +1,129 @@
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="js/d3.min.js"></script>
-        <script src="js/epoch.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/epoch.min.css">
-        <style>
-            .gauges .epoch {
-                display: inline-block;
-            }
-            #message1 {
-                float: left;
-                width: 50%;
-            }
-            #message2 {
-                float: right;
-                width: 50%;
-            }
-        </style>
-    </head>
-    <body>
-        <embed src="sounds/battle.mp3" autostart="true" loop="true" height="0" width="0"></embed>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/epoch.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/epoch.min.css">
+    <style>
+      .gauges .epoch {
+        display: inline-block;
+      }
+      #message1 {
+        float: left;
+        width: 50%;
+      }
+      #message2 {
+        float: right;
+        width: 50%;
+      }
+      </style>
+  </head>
+  <body>
+    <embed src="sounds/battle.mp3" autostart="true" loop="true" height="0" width="0"></embed>
 
-        <div id="area" class="epoch category10" style="height: 200px;"></div>
-        <div class="gauges">
-            <img src="images/ninja_blue.png" height="200"/>
-            <div id="gaugeChart"  class="epoch gauge-large" style="position: relative;"></div>
-            <div id="gaugeChart2" class="epoch gauge-large" style="position: relative;"></div>
-            <img src="images/ninja_orange.png" height="200" />
-        </div>
-        <div id="message">
-            <h1 id="message1" style="position: relative;"></h1>
-            <h1 id="message2" style="position: relative;"></h1>
-        </div>
-        <div>
-            <small><font color="black">画像: Vectorartbox / 音楽: 魔王魂</font></small>
-        </div>
+      <div id="area" class="epoch category10" style="height: 200px;"></div>
+      <div class="gauges">
+        <img src="images/ninja_blue.png" height="200"/>
+        <div id="gaugeChart"  class="epoch gauge-large" style="position: relative;"></div>
+        <div id="gaugeChart2" class="epoch gauge-large" style="position: relative;"></div>
+        <img src="images/ninja_orange.png" height="200" />
+      </div>
+      <div id="message">
+        <h1 id="message1" style="position: relative;"></h1>
+        <h1 id="message2" style="position: relative;"></h1>
+      </div>
+      <div>
+        <small><font color="black">画像: Vectorartbox / 音楽: 魔王魂</font></small>
+      </div>
 
-        <script>
-            var score1 = 0;
-            var score2 = 0;
+      <script>
+        var score1 = 0;
+        var score2 = 0;
 
-            var updateRate = 100;
+        var updateRate = 100;
 
-            var player1 = 0;
-            var player2 = 0;
-            function updateData() {
-              var request=new XMLHttpRequest();
-              request.open("GET", './input', false);
-              request.send("");
-              var data = request.response.split(',');
-              if (data && data.length >= 2) {
-                player1 = data[0];
-                score1 += parseFloat(player1) * 10;
-                player2 = data[1];
-                score2 += parseFloat(player2) * 10;
-//                console.dir("p1:" + player1);
-//                console.dir("p2:" + player2);
-              }
-              setTimeout(function() {
-                  updateData();
-              },updateRate);
-            }
-            updateData();
+        var player1 = 0;
+        var player2 = 0;
+        function updateData() {
+          var request=new XMLHttpRequest();
+          request.open("GET", './input', false);
+          request.send("");
+          var data = request.response.split(',');
+          if (data && data.length >= 2) {
+            player1 = data[0];
+            score1 += parseFloat(player1) * 10;
+            player2 = data[1];
+            score2 += parseFloat(player2) * 10;
+          }
+          setTimeout(function() { updateData(); },updateRate);
+        }
+        updateData();
             
-            <!-- line graph  -->
-            idx = ((new Date()).getTime()/1000)|0;
-            var data = [
-              { label: 'Layer 1', values: [ {time: idx, y: 0}] },
-              { label: 'Layer 2', values: [ {time: idx, y: 0}] }
-            ];
+        <!-- line graph  -->
+        idx = ((new Date()).getTime()/1000)|0;
+        var data = [
+          { label: 'Layer 1', values: [ {time: idx, y: 0}] },
+          { label: 'Layer 2', values: [ {time: idx, y: 0}] }
+        ];
             
-            var areaChartInstance = $('#area').epoch({
-                type: 'time.line',
-                data: data,
-                axes: ['left', 'right', 'bottom']
-            });
+        var areaChartInstance = $('#area').epoch({
+          type: 'time.line',
+          data: data,
+          axes: ['left', 'right', 'bottom']
+        });
 
-            var idx = 3;
-            var nextData;
+        var idx = 3;
+        var nextData;
             
-            function addData() {
-                idx = ((new Date()).getTime()/1000)|0;
-                //console.log("idx",idx);
-                nextData = [
-                   {time: idx, y: player1},{time: idx, y: player2}
-                ];
-                //console.dir(nextData[0]);
-                areaChartInstance.push(nextData);    
+        function addData() {
+          idx = ((new Date()).getTime()/1000)|0;
+          nextData = [
+            {time: idx, y: player1},{time: idx, y: player2}
+          ];
+          areaChartInstance.push(nextData);    
             
-                setTimeout(function() {
-                    addData();
-                },updateRate/10);
-            }
-            addData();
+          setTimeout(function() { addData(); },updateRate/10);
+        }
+        addData();
 
-            var toppa = 0.3;
+        <!-- left hand side gauge  -->
+        value1 = 0;
+        gaugeChartInstance = $('#gaugeChart').epoch({
+          type: 'time.gauge',
+          value: 0.5,
+          format: function(v) { value1=v; return '戦闘力:' + (v*100).toFixed(2); }
+        });
+        function addValue() {
+          gaugeChartInstance.push(player1);
+          var message1 = document.getElementById('message1');
+          if (value1 > toppa) {
+            //message1.textContent = "100突破！";
+          } else {
+            message1.textContent = "score:" + score1.toFixed(2);
+          }
+          setTimeout(function() { addValue(); }, updateRate);
+        }
+        addValue();
 
-            <!-- left hand side gauge  -->
-            value1 = 0;
-            gaugeChartInstance = $('#gaugeChart').epoch({
-              type: 'time.gauge',
-              value: 0.5,
-              format: function(v) { value1=v; return '戦闘力:' + (v*100).toFixed(2); }
-            });
-            function addValue() {
-                gaugeChartInstance.push(player1);
-                var message1 = document.getElementById('message1');
-                if (value1 > toppa) {
-                  //message1.textContent = "100突破！";
-                } else {
-                  message1.textContent = "score:" + score1.toFixed(2);
-                }
-                setTimeout(function() {
-                    addValue();
-                }, updateRate);
-            }
-            addValue();
-
-            <!-- right hand side gauge  -->
-            value2 = 0;
-            gaugeChartInstance2 = $('#gaugeChart2').epoch({
-              type: 'time.gauge',
-              value: 0.5,
-              format: function(v) { value2=v; return '戦闘力:' + (v*100).toFixed(2); }
-            });
-            function addValue2() {
-                gaugeChartInstance2.push(player2); 
-                var message2 = document.getElementById('message2');
-                if (value2 > toppa) {
-                  //message2.textContent = "100突破！";
-                } else {
-                  message2.textContent = "score:" + score2.toFixed(2);
-                }
-                setTimeout(function() {
-                    addValue2();
-                }, updateRate);
-            }
-            addValue2();
-        </script>
-    </body>
+        <!-- right hand side gauge  -->
+        value2 = 0;
+        gaugeChartInstance2 = $('#gaugeChart2').epoch({
+          type: 'time.gauge',
+          value: 0.5,
+          format: function(v) { value2=v; return '戦闘力:' + (v*100).toFixed(2); }
+        });
+        function addValue2() {
+          gaugeChartInstance2.push(player2); 
+          var message2 = document.getElementById('message2');
+          if (value2 > toppa) {
+            //message2.textContent = "100突破！";
+          } else {
+            message2.textContent = "score:" + score2.toFixed(2);
+          }
+          setTimeout(function() { addValue2(); }, updateRate);
+        }
+        addValue2();
+      </script>
+  </body>
 </html>
