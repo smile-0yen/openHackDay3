@@ -6,9 +6,17 @@ public class Rand {
 			System.out.print((Math.random()));
 			if (Math.random() > 0.8) {
 				if (Math.random() > 0.5) {
-					System.out.print(",attack,none");
+					if (Math.random() > 0.5) {
+						System.out.print(",attack,none");
+					} else {
+						System.out.print(",double,none");
+					}
 				} else {
-					System.out.print(",none,attack");
+					if (Math.random() > 0.5) {
+						System.out.print(",none,attack");
+					} else {
+						System.out.print(",none,double");
+					}
 				}
 			}
 			System.out.println();

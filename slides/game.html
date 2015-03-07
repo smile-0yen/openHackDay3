@@ -30,11 +30,18 @@
   <body>
     <div class="main">
     <embed src="sounds/battle.mp3" autostart="true" loop="true" height="0" width="0"></embed>
+
     <audio id="sound-file1" preload="auto">
       <source src="sounds/kick2.mp3" type="audio/mp3">
     </audio>
+    <audio id="sound-file1-double" preload="auto">
+      <source src="sounds/final_attack.mp3" type="audio/mp3">
+    </audio>
     <audio id="sound-file2" preload="auto">
       <source src="sounds/middle_punch2.mp3" type="audio/mp3">
+    </audio>
+    <audio id="sound-file2-double" preload="auto">
+      <source src="sounds/laser_beam.mp3" type="audio/mp3">
     </audio>
 
     <div id="area" class="epoch category10" style="height: 200px;"></div>
@@ -146,6 +153,15 @@
           if (hp2 < 0) {
             setTimeout(bluewin, 2000);
           }
+        } else if (player1_waza == "double" && score1 > 100) {
+          ninja1.src="images/ninja_blue_kick.png";
+          hp2 = hp2 - (score1*2 / 1000);
+          gaugeChartInstance2.push(hp2);
+          score1 = 0;
+          document.getElementById("sound-file1-double").play();
+          if (hp2 < 0) {
+            setTimeout(bluewin, 2000);
+          }
         } else {
           ninja1.src="images/ninja_blue.png";
           message1.textContent = "Power: "+ (score1/10).toFixed(2);
@@ -168,6 +184,15 @@
           gaugeChartInstance.push(hp1);
           score2 = 0;
           document.getElementById("sound-file2").play();
+          if (hp1 < 0) {
+            setTimeout(orangewin, 2000);
+          }
+        } else if (player2_waza == "double" && score2 > 100) {
+          ninja2.src="images/ninja_orange_kick.png";
+          hp1 = hp1 - (score2*2 / 1000);
+          gaugeChartInstance.push(hp1);
+          score2 = 0;
+          document.getElementById("sound-file2-double").play();
           if (hp1 < 0) {
             setTimeout(orangewin, 2000);
           }
