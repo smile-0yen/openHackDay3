@@ -6,13 +6,13 @@ public class Rand {
 			System.out.print((Math.random()));
 			if (Math.random() > 0.8) {
 				if (Math.random() > 0.5) {
-					if (Math.random() > 0.5) {
+					if (Math.random() > 0.8) {
 						System.out.print(",attack,none");
 					} else {
 						System.out.print(",double,none");
 					}
 				} else {
-					if (Math.random() > 0.5) {
+					if (Math.random() > 0.8) {
 						System.out.print(",none,attack");
 					} else {
 						System.out.print(",none,double");
