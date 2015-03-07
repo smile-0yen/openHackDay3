@@ -129,7 +129,6 @@
         var ninja1 = document.getElementById('ninjaBlue');
         var message1 = document.getElementById('message1');
         if (player1_waza == "attack" && score1 > 10) {
-          message1.textContent = "攻撃!!";
           ninja1.src="images/ninja_blue_kick.png";
           hp2 = hp2 - (score1 / 1000);
           gaugeChartInstance2.push(hp2);
@@ -140,7 +139,7 @@
           }
         } else {
           ninja1.src="images/ninja_blue.png";
-          message1.textContent = "戦闘力:" + score1.toFixed(2);
+          message1.textContent = "Power: "+ (score1/10).toFixed(2);
         }
         setTimeout(function() { addValue(); }, updateRate);
       }
@@ -150,7 +149,6 @@
         var ninja2 = document.getElementById('ninjaOrange');
         var message2 = document.getElementById('message2');
         if (player2_waza == "attack" && score2 > 10) {
-          message2.textContent = "攻撃!!";
           ninja2.src="images/ninja_orange_kick.png";
           hp1 = hp1 - (score2 / 1000);
           gaugeChartInstance.push(hp1);
@@ -161,7 +159,7 @@
           }
         } else {
           ninja2.src="images/ninja_orange.png";
-          message2.textContent = "戦闘力:" + score2.toFixed(2);
+          message2.textContent = "Power: " + (score2/10).toFixed(2);
         }
         setTimeout(function() { addValue2(); }, updateRate);
       }
