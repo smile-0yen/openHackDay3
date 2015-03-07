@@ -21,8 +21,8 @@
             <!-- line graph  -->
             idx = ((new Date()).getTime()/1000)|0;
             var data = [
-              { label: 'Layer 1', values: [ {time: idx, y: 3}/*,{time: idx+1, y: 2}*/] },
-              { label: 'Layer 2', values: [ {time: idx, y: 1}/*{time: idx+1, y: 3}*/] }
+              { label: 'Layer 1', values: [ {time: idx, y: 0}] },
+              { label: 'Layer 2', values: [ {time: idx, y: 0}] }
             ];
             
             var areaChartInstance = $('#area').epoch({
@@ -30,6 +30,26 @@
                 data: data,
                 axes: ['left', 'right', 'bottom']
             });
+
+            var player1 = 0;
+            var player2 = 0;
+            function updateData() {
+              var request=new XMLHttpRequest();
+              request.open("GET", './input', false);
+              request.send("");
+              player1 = request.response;
+              var data = request.response.split(',');
+              if (data && data.length == 2) {
+                player1 = data[0];
+                player2 = data[1];
+                console.dir("p1:" + player1);
+                console.dir("p2:" + player2);
+              }
+              setTimeout(function() {
+                  updateData();
+              },500);
+            }
+            updateData();
             
             var idx = 3;
             var nextData;
@@ -38,7 +58,7 @@
                 idx = ((new Date()).getTime()/1000)|0;
                 //console.log("idx",idx);
                 nextData = [
-                   {time: idx, y: Math.random()*10},{time: idx, y: Math.random()*10}
+                   {time: idx, y: player1},{time: idx, y: player2}
                 ];
                 //console.dir(nextData[0]);
                 areaChartInstance.push(nextData);    
@@ -55,10 +75,8 @@
               value: 0.5
             });
         
-            var nextValue;
             function addValue() {
-                nextValue = Math.random();
-                gaugeChartInstance.push(nextValue);    
+                gaugeChartInstance.push(player1);
                 setTimeout(function() {
                     addValue();
                 }, 500);
@@ -71,10 +89,9 @@
               value: 0.5
             });
         
-            var nextValue2;
             function addValue2() {
-                nextValue2 = Math.random();
-                gaugeChartInstance2.push(nextValue2);    
+                gaugeChartInstance2.push(player2); 
+                //gaugeChartInstance2.push(Math.random()); 
                 setTimeout(function() {
                     addValue2();
                 }, 500);
