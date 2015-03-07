@@ -66,9 +66,9 @@
         }
         if (data && data.length >= 4) {
           player1_waza = data[2];
-          player2_waza = data[3];
-          console.dir("p1:"+player1_waza);
-          console.dir("p2:"+player2_waza);
+          player2_waza = data[3].replace(/\s+$/, "");
+          console.dir("p1:"+player1_waza+":");
+          console.dir("p2:"+player2_waza+":");
         } else {
           player1_waza = "none";
           player2_waza = "none";
@@ -83,7 +83,7 @@
         { label: 'Layer 1', values: [ {time: idx, y: 0}] },
         { label: 'Layer 2', values: [ {time: idx, y: 0}] }
       ];
-            
+
       var areaChartInstance = $('#area').epoch({
         type: 'time.line',
         data: data,
