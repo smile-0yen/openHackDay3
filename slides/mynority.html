@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 
     <head>
         <meta charset="utf-8">
@@ -78,6 +78,9 @@
                     </div>
 
                     <script>
+                        var idx = 3;
+                        var nextData;
+
                         idx = ((new Date()).getTime()/1000)|0;
                         var data = [
                           { label: 'Layer 1', values: [ {time: idx, y: 3}/*,{time: idx+1, y: 2}*/] },
@@ -89,9 +92,6 @@
                             data: data,
                             axes: ['left', 'right', 'bottom']
                         });
-                        
-                        var idx = 3;
-                        var nextData;
                         
                         function addData() {
                             idx = ((new Date()).getTime()/1000)|0;
