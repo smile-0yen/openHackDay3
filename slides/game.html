@@ -166,8 +166,6 @@
           gaugeChartInstance2.push(hp2);
           score1 = 0;
           player1_double = "none";
-          //document.getElementById("sound-file1-double").play();
-          document.getElementById("sound-file1").play();
           if (hp2 < 0) {
             setTimeout(function(){bluewin();}, 2000);
           }
@@ -211,8 +209,6 @@
           gaugeChartInstance.push(hp1);
           score2 = 0;
           player2_double = "none";
-          //document.getElementById("sound-file2-double").play();
-          document.getElementById("sound-file2").play();
           if (hp1 < 0) {
             setTimeout(function(){orangewin();}, 2000);
           }
@@ -256,16 +252,19 @@
         setTimeout(function(){bluesp2();}, updateRate*3);
         var ninja1 = document.getElementById('ninjaBlue');
         ninja1.src="images/blue_sp01.png";
+        document.getElementById("sound-file1").play();
       }
       function bluesp2() {
         setTimeout(function(){bluesp3();}, updateRate*3);
         var ninja1 = document.getElementById('ninjaBlue');
         ninja1.src="images/blue_sp02.png";
+        document.getElementById("sound-file1").play();
       }
       function bluesp3() {
         setTimeout(function(){bluesleep();}, updateRate*3);
         var ninja1 = document.getElementById('ninjaBlue');
         ninja1.src="images/blue_sp03.png";
+        document.getElementById("sound-file1").play();
       }
       function bluesleep() {
         player1_motion = false;
@@ -275,16 +274,19 @@
         setTimeout(function(){orangesp2();}, updateRate*3);
         var ninja2 = document.getElementById('ninjaOrange');
         ninja2.src="images/orange_sp01.png";
+        document.getElementById("sound-file2").play();
       }
       function orangesp2() {
         setTimeout(function(){orangesp3();}, updateRate*3);
         var ninja2 = document.getElementById('ninjaOrange');
         ninja2.src="images/orange_sp02.png";
+        document.getElementById("sound-file2").play();
       }
       function orangesp3() {
         setTimeout(function(){orangesleep();}, updateRate*3);
         var ninja2 = document.getElementById('ninjaOrange');
         ninja2.src="images/orange_sp03.png";
+        document.getElementById("sound-file2").play();
       }
       function orangesleep() {
         player2_motion = false;
