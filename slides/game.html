@@ -128,7 +128,7 @@
       function addValue() {
         var ninja1 = document.getElementById('ninjaBlue');
         var message1 = document.getElementById('message1');
-        if (player1_waza == "attack") {
+        if (player1_waza == "attack" && score1 > 0.1) {
           message1.textContent = "攻撃!!";
           ninja1.src="images/ninja_blue_kick.png";
           hp2 = hp2 - (score1 / 1000);
@@ -149,7 +149,7 @@
       function addValue2() {
         var ninja2 = document.getElementById('ninjaOrange');
         var message2 = document.getElementById('message2');
-        if (player2_waza == "attack") {
+        if (player2_waza == "attack" && score2 > 0.1) {
           message2.textContent = "攻撃!!";
           ninja2.src="images/ninja_orange_kick.png";
           hp1 = hp1 - (score2 / 1000);
