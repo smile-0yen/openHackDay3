@@ -149,8 +149,8 @@
       var hp1 = 1;
       var hp2 = 1;
 
-      //var attach_threashold = 30;
-      var attach_threashold = 100;
+      var attach_threashold = 30;
+      //var attach_threashold = 100;
 
       function addValue() {
         if (player1_motion == true) {
@@ -186,9 +186,9 @@
             message1.textContent = "Power: "+ (score1/10).toFixed(2);
           }
         }
-        if (10 > score1/10) {
+        if (attach_threashold > score1) {
           message1.style.color = "black";
-        } else if (10 < score1/10) {
+        } else {
           message1.style.color = "red";
         }
         setTimeout(function() { addValue(); }, updateRate);
@@ -229,9 +229,9 @@
             message2.textContent = "Power: " + (score2/10).toFixed(2);
           }
         }
-        if (10 > score2/10) {
+        if (attach_threashold > score2) {
           message2.style.color = "black";
-        } else if (10 < score2/10) {
+        } else {
           message2.style.color = "red";
         }
         setTimeout(function() { addValue2(); }, updateRate);
