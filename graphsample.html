@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="js/d3.min.js"></script>
         <script src="js/epoch.min.js"></script>
@@ -18,19 +19,6 @@
         </div>
 
         <script>
-            <!-- line graph  -->
-            idx = ((new Date()).getTime()/1000)|0;
-            var data = [
-              { label: 'Layer 1', values: [ {time: idx, y: 0}] },
-              { label: 'Layer 2', values: [ {time: idx, y: 0}] }
-            ];
-            
-            var areaChartInstance = $('#area').epoch({
-                type: 'time.line',
-                data: data,
-                axes: ['left', 'right', 'bottom']
-            });
-
             var updateRate = 100;
 
             var player1 = 0;
@@ -52,6 +40,19 @@
             }
             updateData();
             
+            <!-- line graph  -->
+            idx = ((new Date()).getTime()/1000)|0;
+            var data = [
+              { label: 'Layer 1', values: [ {time: idx, y: 0}] },
+              { label: 'Layer 2', values: [ {time: idx, y: 0}] }
+            ];
+            
+            var areaChartInstance = $('#area').epoch({
+                type: 'time.line',
+                data: data,
+                axes: ['left', 'right', 'bottom']
+            });
+
             var idx = 3;
             var nextData;
             
@@ -66,14 +67,15 @@
             
                 setTimeout(function() {
                     addData();
-                },updateRate);
+                },updateRate/10);
             }
             addData();
 
             <!-- left hand side gauge  -->
             gaugeChartInstance = $('#gaugeChart').epoch({
               type: 'time.gauge',
-              value: 0.5
+              value: 0.5,
+              format: function(v) { return '戦闘力:' + (v*100).toFixed(2); }
             });
             function addValue() {
                 gaugeChartInstance.push(player1);
@@ -86,7 +88,8 @@
             <!-- right hand side gauge  -->
             gaugeChartInstance2 = $('#gaugeChart2').epoch({
               type: 'time.gauge',
-              value: 0.5
+              value: 0.5,
+              format: function(v) { return '戦闘力:' + (v*100).toFixed(2); }
             });
             function addValue2() {
                 gaugeChartInstance2.push(player2); 
