@@ -137,7 +137,7 @@
       function addValue() {
         var ninja1 = document.getElementById('ninjaBlue');
         var message1 = document.getElementById('message1');
-        if (player1_waza == "attack" && score1 > 10) {
+        if (player1_waza == "attack" && score1 > 100) {
           ninja1.src="images/ninja_blue_kick.png";
           hp2 = hp2 - (score1 / 1000);
           gaugeChartInstance2.push(hp2);
@@ -157,7 +157,7 @@
       function addValue2() {
         var ninja2 = document.getElementById('ninjaOrange');
         var message2 = document.getElementById('message2');
-        if (player2_waza == "attack" && score2 > 10) {
+        if (player2_waza == "attack" && score2 > 100) {
           ninja2.src="images/ninja_orange_kick.png";
           hp1 = hp1 - (score2 / 1000);
           gaugeChartInstance.push(hp1);
