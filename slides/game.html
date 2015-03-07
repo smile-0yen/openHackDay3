@@ -21,6 +21,12 @@
   </head>
   <body>
     <embed src="sounds/battle.mp3" autostart="true" loop="true" height="0" width="0"></embed>
+    <audio id="sound-file1" preload="auto">
+      <source src="sounds/kick2.mp3" type="audio/mp3">
+    </audio>
+    <audio id="sound-file2" preload="auto">
+      <source src="sounds/middle_punch2.mp3" type="audio/mp3">
+    </audio>
 
     <div id="area" class="epoch category10" style="height: 200px;"></div>
     <div class="gauges">
@@ -45,6 +51,8 @@
 
       var player1 = 0;
       var player2 = 0;
+      var player1_waza = "none";
+      var player2_waza = "none";
       function updateData() {
         var request=new XMLHttpRequest();
         request.open("GET", './input', false);
@@ -52,9 +60,18 @@
         var data = request.response.split(',');
         if (data && data.length >= 2) {
           player1 = data[0];
-          score1 += parseFloat(player1) * 10;
+          score1 += parseFloat(player1);
           player2 = data[1];
-          score2 += parseFloat(player2) * 10;
+          score2 += parseFloat(player2);
+        }
+        if (data && data.length >= 4) {
+          player1_waza = data[2];
+          player2_waza = data[3];
+          console.dir("p1:"+player1_waza);
+          console.dir("p2:"+player2_waza);
+        } else {
+          player1_waza = "none";
+          player2_waza = "none";
         }
         setTimeout(function() { updateData(); },updateRate);
       }
@@ -88,31 +105,50 @@
       addData();
 
       <!-- left hand side gauge  -->
-      value1 = 0;
+      var value1 = 0;
       gaugeChartInstance = $('#gaugeChart').epoch({
         type: 'time.gauge',
-        value: 0.5,
-        format: function(v) { value1=v; return '戦闘力:' + (v*100).toFixed(2); }
+        value: 1,
+        format: function(v) { value1=v; return 'HP:' + (v*100).toFixed(2); }
       });
+
+      <!-- right hand side gauge  -->
+      var value2 = 0;
+      gaugeChartInstance2 = $('#gaugeChart2').epoch({
+        type: 'time.gauge',
+        value: 1,
+        format: function(v) { value2=v; return 'HP:' + (v*100).toFixed(2); }
+      });
+
+      var hp1 = 1;
+      var hp2 = 1;
+
       function addValue() {
-        gaugeChartInstance.push(player1);
         var message1 = document.getElementById('message1');
-        message1.textContent = "score:" + score1.toFixed(2);
+        if (player1_waza == "attack") {
+          message1.textContent = "攻撃!!";
+          hp2 = hp2 - (score1 / 100);
+          gaugeChartInstance2.push(hp2);
+          score1 = 0;
+          document.getElementById("sound-file1").play();
+        } else {
+          message1.textContent = "戦闘力:" + score1.toFixed(2);
+        }
         setTimeout(function() { addValue(); }, updateRate);
       }
       addValue();
 
-      <!-- right hand side gauge  -->
-      value2 = 0;
-      gaugeChartInstance2 = $('#gaugeChart2').epoch({
-        type: 'time.gauge',
-        value: 0.5,
-        format: function(v) { value2=v; return '戦闘力:' + (v*100).toFixed(2); }
-      });
       function addValue2() {
-        gaugeChartInstance2.push(player2); 
         var message2 = document.getElementById('message2');
-        message2.textContent = "score:" + score2.toFixed(2);
+        if (player2_waza == "attack") {
+          message2.textContent = "攻撃!!";
+          hp1 = hp1 - (score2 / 100);
+          gaugeChartInstance.push(hp1);
+          score2 = 0;
+          document.getElementById("sound-file2").play();
+        } else {
+          message2.textContent = "戦闘力:" + score2.toFixed(2);
+        }
         setTimeout(function() { addValue2(); }, updateRate);
       }
       addValue2();
