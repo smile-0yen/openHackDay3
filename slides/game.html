@@ -17,7 +17,7 @@
         float: right;
         width: 50%;
       }
-      </style>
+    </style>
   </head>
   <body>
     <embed src="sounds/battle.mp3" autostart="true" loop="true" height="0" width="0"></embed>
@@ -30,10 +30,10 @@
 
     <div id="area" class="epoch category10" style="height: 200px;"></div>
     <div class="gauges">
-      <img src="images/ninja_blue.png" height="200"/>
       <div id="gaugeChart"  class="epoch gauge-large" style="position: relative;"></div>
+      <img id="ninjaBlue" src="images/ninja_blue.png" height="200"/>
+      <img id="ninjaOrange" src="images/ninja_orange.png" height="200" />
       <div id="gaugeChart2" class="epoch gauge-large" style="position: relative;"></div>
-      <img src="images/ninja_orange.png" height="200" />
     </div>
     <div id="message">
       <h1 id="message1" style="position: relative;"></h1>
@@ -41,6 +41,8 @@
     </div>
     <div>
       <small><font color="black">画像: Vectorartbox / 音楽: 魔王魂</font></small>
+    </div>
+    <div id="footer" width="900" height="50">
     </div>
 
     <script>
@@ -124,9 +126,11 @@
       var hp2 = 1;
 
       function addValue() {
+        var ninja1 = document.getElementById('ninjaBlue');
         var message1 = document.getElementById('message1');
         if (player1_waza == "attack") {
           message1.textContent = "攻撃!!";
+          ninja1.src="images/ninja_blue_kick.png";
           hp2 = hp2 - (score1 / 100);
           gaugeChartInstance2.push(hp2);
           score1 = 0;
@@ -135,6 +139,7 @@
             setTimeout(bluewin, 2000);
           }
         } else {
+          ninja1.src="images/ninja_blue.png";
           message1.textContent = "戦闘力:" + score1.toFixed(2);
         }
         setTimeout(function() { addValue(); }, updateRate);
@@ -142,9 +147,11 @@
       addValue();
 
       function addValue2() {
+        var ninja2 = document.getElementById('ninjaOrange');
         var message2 = document.getElementById('message2');
         if (player2_waza == "attack") {
           message2.textContent = "攻撃!!";
+          ninja2.src="images/ninja_orange_kick.png";
           hp1 = hp1 - (score2 / 100);
           gaugeChartInstance.push(hp1);
           score2 = 0;
@@ -153,6 +160,7 @@
             setTimeout(orangewin, 2000);
           }
         } else {
+          ninja2.src="images/ninja_orange.png";
           message2.textContent = "戦闘力:" + score2.toFixed(2);
         }
         setTimeout(function() { addValue2(); }, updateRate);
