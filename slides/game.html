@@ -17,9 +17,18 @@
         float: right;
         width: 50%;
       }
+      .main {  
+        width: 100%;  
+        margin: 100 auto;  
+      }  
+      .main div   {  
+        width: 80%;  
+        margin: 0 auto;  
+      }  
     </style>
   </head>
   <body>
+    <div class="main">
     <embed src="sounds/battle.mp3" autostart="true" loop="true" height="0" width="0"></embed>
     <audio id="sound-file1" preload="auto">
       <source src="sounds/kick2.mp3" type="audio/mp3">
@@ -36,11 +45,11 @@
       <div id="gaugeChart2" class="epoch gauge-large" style="position: relative;"></div>
     </div>
     <div id="message">
-      <h1 id="message1" style="position: relative;"></h1>
-      <h1 id="message2" style="position: relative;"></h1>
+      <h1 id="message1" align="center" style="position: relative;"></h1>
+      <h1 id="message2" align="center" style="position: relative;"></h1>
     </div>
     <div>
-      <small><font color="black">画像: Vectorartbox / 音楽: 魔王魂</font></small>
+      <small><font color="gray">画像: Vectorartbox / 音楽: 魔王魂</font></small>
     </div>
     <div id="footer" width="900" height="50">
     </div>
@@ -174,5 +183,6 @@
         location.href="orangewin.html";
       }
     </script>
+  </div>
   </body>
 </html>
