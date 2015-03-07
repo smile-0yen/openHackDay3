@@ -150,6 +150,11 @@
           ninja1.src="images/ninja_blue.png";
           message1.textContent = "Power: "+ (score1/10).toFixed(2);
         }
+        if (10 > score1/10) {
+          message1.style.color = "black";
+        } else if (10 < score1/10) {
+          message1.style.color = "red";
+        }
         setTimeout(function() { addValue(); }, updateRate);
       }
       addValue();
@@ -169,6 +174,11 @@
         } else {
           ninja2.src="images/ninja_orange.png";
           message2.textContent = "Power: " + (score2/10).toFixed(2);
+        }
+        if (10 > score2/10) {
+          message2.style.color = "black";
+        } else if (10 < score2/10) {
+          message2.style.color = "red";
         }
         setTimeout(function() { addValue2(); }, updateRate);
       }
