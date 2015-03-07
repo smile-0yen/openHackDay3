@@ -131,6 +131,9 @@
           gaugeChartInstance2.push(hp2);
           score1 = 0;
           document.getElementById("sound-file1").play();
+          if (hp2 < 0) {
+            setTimeout(bluewin, 2000);
+          }
         } else {
           message1.textContent = "戦闘力:" + score1.toFixed(2);
         }
@@ -146,12 +149,22 @@
           gaugeChartInstance.push(hp1);
           score2 = 0;
           document.getElementById("sound-file2").play();
+          if (hp1 < 0) {
+            setTimeout(orangewin, 2000);
+          }
         } else {
           message2.textContent = "戦闘力:" + score2.toFixed(2);
         }
         setTimeout(function() { addValue2(); }, updateRate);
       }
       addValue2();
+
+      function bluewin() {
+        location.href="bluewin.html";
+      }
+      function orangewin() {
+        location.href="orangewin.html";
+      }
     </script>
   </body>
 </html>
